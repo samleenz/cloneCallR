@@ -3,26 +3,23 @@
 #' @param sce a sce object with an altExp containig barcode counts 
 #' @param altExp_assay name of the altExp assay containing the barcode counts
 #' @param barcodes which barcodes in the legoteknik counts to use
-#' @param return return the dmm
 #'
-#' @returns 
+#' @returns a demuxmix model object
 #' @export
 #'
 #' @examples
+#' # TODO: add example usage
 runDemuxmix <- function(
     sce, 
     altExp_assay = "lego",
     barcodes = c("eBFP2", "Sapphire", "Venus", "Tomato", "Katushka")
 ){
-  require(demuxmix)
-  require(SingleCellExperiment)
   # sanity check args
   if(! altExp_assay %in% altExpNames(sce)){
     stop(paste0('altExp assay "', altExp_assay, '" not found in `sce`'))
   }
   
   if(is.null(sce$detected)){
-    require(scuttle)
     df <- scuttle::perCellQCMetrics(sce)
     detected <- df$detected
   } else{

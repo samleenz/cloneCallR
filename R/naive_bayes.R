@@ -6,12 +6,13 @@
 #' @param eps small value used to clamp probabilities away from 0 and 1 for stability.
 #'
 #' @returns A data frame with columns `cell`, `clone`, `prob`, `margin`, and `call`.
-#'
+#' @export
+#' 
 #' @examples
 #' # TODO: add example usage
 calculateNBayesClassification <- function(dmm, clone_mat, min_conf = 0.9, eps = 1e-12){
   # extract the posterior probabilities
-  Ppos <- slot(dmm, "posteriorProb")
+  Ppos <- dmm@posteriorProb
   
   stopifnot(is.matrix(Ppos))
   H <- nrow(Ppos) # barcodes
@@ -63,6 +64,7 @@ calculateNBayesClassification <- function(dmm, clone_mat, min_conf = 0.9, eps = 
 #' @param barcodes which barcodes in the legoteknik counts to use.
 #'
 #' @returns The input `sce` with classification columns appended to `colData`.
+#' @export
 #'
 #' @examples
 #' # TODO: add example usage
@@ -102,6 +104,6 @@ runNBayesClassification <- function(
 
 
 
-  colData(sce) <- cbind(colData(sce), ret)
+  SummarizedExperiment::colData(sce) <- cbind(colData(sce), ret)
   return(sce)
 }
