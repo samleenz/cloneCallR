@@ -1,9 +1,9 @@
 Package: cloneCallR
-Title: What the Package Does (One Line, Title Case)
+Title: Tools For Clone Calling Using demuxmix Posteriors And A Naive Bayes Classifier
 Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Sam", "Lee", , "samleenz@me.com", role = c("aut", "cre"))
+Description: Combinatorial barcodes allow us to efficiently create labelled populations for sample multiplexing or, more likely, lineage tracing experiments. Regular demultiplexing tools however cannot be used as they assume a one-to-one mapping between barcodes and samples. cloneCallR implements a naive Bayes classifier that uses the posterior probabilities from demuxmix to assign cells to clones based on a known barcode-clone mapping.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
