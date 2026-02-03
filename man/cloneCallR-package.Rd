@@ -4,12 +4,12 @@
 \name{cloneCallR-package}
 \alias{cloneCallR}
 \alias{cloneCallR-package}
-\title{cloneCallR: What the Package Does (One Line, Title Case)}
+\title{cloneCallR: Tools For Clone Calling Using demuxmix Posteriors And A Naive Bayes Classifier}
 \description{
-What the package does (one paragraph).
+Combinatorial barcodes allow us to efficiently create labelled populations for sample multiplexing or, more likely, lineage tracing experiments. Regular demultiplexing tools however cannot be used as they assume a one-to-one mapping between barcodes and samples. cloneCallR implements a naive Bayes classifier that uses the posterior probabilities from demuxmix to assign cells to clones based on a known barcode-clone mapping.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com}
+\strong{Maintainer}: Sam Lee \email{samleenz@me.com}
 
 }
 \keyword{internal}

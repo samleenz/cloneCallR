@@ -131,7 +131,8 @@ runNBayesClassification <- function(
     )
   )
 
-  assay(altExp(sce, altExp_assay), "demuxmix_posterior") <- dmm@posteriorProb[rownames(altExp(sce, altExp_assay)), ]
+  assay(altExp(sce, altExp_assay), "demuxmix_posterior", withDimnames = FALSE) <- matrix(NA, nrow = nrow(altExp(sce, altExp_assay)), ncol = ncol(sce))
+  assay(altExp(sce, altExp_assay), "demuxmix_posterior")[barcodes, ] <- dmm@posteriorProb[barcodes, ]
 
   SummarizedExperiment::colData(sce) <- cbind(colData(sce), ret)
   return(sce)
