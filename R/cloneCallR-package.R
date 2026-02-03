@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom grid unit
 #' @importFrom SingleCellExperiment altExp
 #' @importFrom SingleCellExperiment altExpNames
 #' @importFrom SingleCellExperiment counts
