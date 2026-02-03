@@ -8,3 +8,14 @@
 #'
 #' @source Generated via `createCodeMatrix()` in `data-raw/bsvtk_clone_matrix.R`.
 "bsvtk_clone_matrix"
+
+#' CloneCallR palette
+#'
+#' A list of named color values and ggplot2 scales used for clone plotting.
+#'
+#' @format A named list with elements `hex`, `colour`, and `fill`. `hex` is a
+#' named character vector of hex colors keyed by clone ID; `colour` and `fill`
+#' are ggplot2 scale objects built from `hex`.
+#'
+#' @source Generated in `data-raw/clonepalette.R`.
+"clonepalette"
