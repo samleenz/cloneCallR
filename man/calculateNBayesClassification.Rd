@@ -4,16 +4,12 @@
 \alias{calculateNBayesClassification}
 \title{Naive Bayes clone assignment from demuxmix posteriors}
 \usage{
-calculateNBayesClassification(dmm, clone_mat, min_conf = 0.9, eps = 1e-12)
+calculateNBayesClassification(post, min_conf = 0.9)
 }
 \arguments{
-\item{dmm}{demuxmix model object with a posteriorProb slot.}
-
-\item{clone_mat}{binary barcode-by-clone matrix (barcodes in rows, clones in columns).}
+\item{post}{matrix of posterior probabilties (clones x cells), probably from \code{calculateClonePosteriors()}.}
 
 \item{min_conf}{minimum posterior probability to call a clone "assigned".}
-
-\item{eps}{small value used to clamp probabilities away from 0 and 1 for stability.}
 }
 \value{
 A data frame with columns \code{cell}, \code{clone}, \code{prob}, \code{margin}, and \code{call}.

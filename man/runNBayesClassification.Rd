@@ -27,7 +27,7 @@ runNBayesClassification(
 \item{barcodes}{which barcodes in the legoteknik counts to use.}
 }
 \value{
-The input \code{sce} with classification columns appended to \code{colData}.
+The input \code{sce} with classification columns appended to \code{colData} and the posterior probabilities in an altExp.
 }
 \description{
 Run demuxmix and naive Bayes clone classification on a SCE
