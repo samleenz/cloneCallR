@@ -50,6 +50,10 @@ calculateClonePosteriors <- function(ppos, clone_mat, eps = 1e-12){
 #' # TODO: add example usage
 calculateNBayesClassification <- function(post, min_conf = 0.9){
   N <- ncol(post)
+  if(is.null(colnames(post)) || anyNA(colnames(post)) || any(colnames(post) == "")){
+    warning("`post` has missing column names. Assigning default cell names.")
+    colnames(post) <- paste0("C", seq_len(N))
+  }
 
   best_k <- max.col(t(post), ties.method = "first")
   best_clone <- rownames(post)[best_k]
