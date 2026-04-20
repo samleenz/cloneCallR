@@ -1,24 +1,43 @@
-plotPosteriorPHeatmap <- function(sce, annots = c("cc_clone", "scDblFinder.score")) {
+#' Plot a heatmap of naive Bayes posterior probabilities
+#'
+#' Draw a `ComplexHeatmap` heatmap of clone posterior probabilities stored in
+#' the `nbayes_posteriors` alternative experiment of a
+#' `SingleCellExperiment`. Rows are annotated with clone assignments and any
+#' additional columns requested from `colData(sce)`.
+#'
+#' @param sce A `SingleCellExperiment` containing an alternative experiment
+#'   named `nbayes_posteriors`. The function also expects `colData(sce)` to
+#'   contain the requested annotation columns and `cc_call` for row splitting.
+#' @param annots Character vector of additional annotation column names from
+#'   `colData(sce)` to display alongside the clone assignment.
+#' @param clone_col Name of the clone assignment column in `colData(sce)`.
+#'
+#' @returns Invisibly returns the drawn `ComplexHeatmap` object.
+#' @export
+#'
+#' @examples
+#' # TODO: add example usage
+plotPosteriorPHeatmap <- function(sce,
+                                  annots = c("scDblFinder.score"),
+                                  clone_col = "cc_clone") {
     
   mat <- t(counts(altExp(sce, "nbayes_posteriors")))
   ann_df <- colData(sce)
+  annot_cols <- unique(c(clone_col, annots))
+  missing_cols <- setdiff(c(annot_cols, "cc_call"), colnames(ann_df))
   
+  if (length(missing_cols) > 0) {
+    stop(
+      "Missing required columns in colData(sce): ",
+      paste(missing_cols, collapse = ", "),
+      call. = FALSE
+    )
+  }
   
-  
-  dbl_col_fun <- circlize::colorRamp2(
-    c(0, 1),
-    c("white", "firebrick3")
-  )
+  row_annot_df <- as.data.frame(ann_df[, annot_cols, drop = FALSE])
   
   row_ha <- ComplexHeatmap::rowAnnotation(
-    clone     = ann_df$cc_clone,
-    Doublet   = ann_df$scDblFinder.score,
-    col = list(
-      clone     = clonepalette$hex[unique(sce$cc_clone)],
-      # codeword  = laf::plotting_scales$pal_all[unique(bayes_df$codeword)],
-      # dmm_clone = laf::plotting_scales$pal_all[unique(sce$dmm_clone)],
-      Doublet = dbl_col_fun
-    ),
+    df = row_annot_df,
     show_annotation_name = TRUE,
     annotation_name_side = "top",
     show_legend = FALSE
@@ -37,7 +56,7 @@ plotPosteriorPHeatmap <- function(sce, annots = c("cc_clone", "scDblFinder.score
     name = "pProb",
     left_annotation = row_ha,
     cluster_columns = FALSE,
-    row_split = ann_df$cc_call,
+    row_split = ann_df[["cc_call"]],
     cluster_row_slices = TRUE,
     show_row_names = FALSE,
     show_column_names = TRUE,
