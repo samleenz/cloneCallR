@@ -7,7 +7,8 @@
 runDemuxmix(
   sce,
   altExp_assay = "lego",
-  barcodes = c("eBFP2", "Sapphire", "Venus", "Tomato", "Katushka")
+  barcodes = c("eBFP2", "Sapphire", "Venus", "Tomato", "Katushka"),
+  ...
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ runDemuxmix(
 \item{altExp_assay}{name of the altExp assay containing the barcode counts}
 
 \item{barcodes}{which barcodes in the legoteknik counts to use}
+
+\item{...}{additional arguments passed to \code{demuxmix::demuxmix()}}
 }
 \value{
 a demuxmix model object

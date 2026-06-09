@@ -3,6 +3,7 @@
 #' @param sce a sce object with an altExp containig barcode counts 
 #' @param altExp_assay name of the altExp assay containing the barcode counts
 #' @param barcodes which barcodes in the legoteknik counts to use
+#' @param ... additional arguments passed to `demuxmix::demuxmix()`
 #'
 #' @returns a demuxmix model object
 #' @export
@@ -12,7 +13,8 @@
 runDemuxmix <- function(
     sce, 
     altExp_assay = "lego",
-    barcodes = c("eBFP2", "Sapphire", "Venus", "Tomato", "Katushka")
+    barcodes = c("eBFP2", "Sapphire", "Venus", "Tomato", "Katushka"),
+    ...
 ){
   # sanity check args
   if(! altExp_assay %in% altExpNames(sce)){
@@ -29,7 +31,8 @@ runDemuxmix <- function(
   # run demuxmix
   dmm <- demuxmix::demuxmix(
     counts(altExp(sce, altExp_assay))[barcodes, ], 
-    rna = detected
+    rna = detected,
+    ...
   )
   
   
